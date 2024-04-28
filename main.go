@@ -4,19 +4,19 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/TurnCoffeeIntoCode/re-go/ssr"
 )
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		props := map[string]interface{}{
-			"Name": "Rendered using ReGo",
+		numbers := make([]string, 0, 100)
+		for i := 0; i <= 100; i++ {
+			numbers = append(numbers, "Number "+strconv.Itoa(i))
 		}
-		queryString := r.URL.Query()
-		if queryString.Get("name") != "" {
-			props["Name"] = queryString.Get("name")
-		}
+		props := make(map[string]interface{})
+		props["numbers"] = numbers
 		page := ssr.Page{
 			Path:  r.URL.Path,
 			Props: props,

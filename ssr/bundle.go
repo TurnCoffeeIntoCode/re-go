@@ -22,6 +22,7 @@ func serverBundle() string {
 		},
 	})
 	script := string(result.OutputFiles[0].Contents)
+
 	return script
 }
 
